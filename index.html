@@ -122,6 +122,7 @@
     <div class="members-grid">
 
       <div class="member-card" data-member="wonhee" tabindex="0" role="button">
+        <button class="member-share-btn" data-share="wonhee" aria-label="Share Wonhee" title="Share">⎋</button>
         <div class="member-img-wrap">
           <img src="assets/wonhee.jpg" class="member-img" alt="Wonhee"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
@@ -142,6 +143,7 @@
       </div>
 
       <div class="member-card" data-member="minju" tabindex="0" role="button">
+        <button class="member-share-btn" data-share="minju" aria-label="Share Minju" title="Share">⎋</button>
         <div class="member-img-wrap">
           <img src="assets/minju.jpg" class="member-img" alt="Minju"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
@@ -162,6 +164,7 @@
       </div>
 
       <div class="member-card" data-member="moka" tabindex="0" role="button">
+        <button class="member-share-btn" data-share="moka" aria-label="Share Moka" title="Share">⎋</button>
         <div class="member-img-wrap">
           <img src="assets/moka.jpg" class="member-img" alt="Moka"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
@@ -182,6 +185,7 @@
       </div>
 
       <div class="member-card" data-member="iroha" tabindex="0" role="button">
+        <button class="member-share-btn" data-share="iroha" aria-label="Share Iroha" title="Share">⎋</button>
         <div class="member-img-wrap">
           <img src="assets/iroha.jpg" class="member-img" alt="Iroha"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
@@ -202,6 +206,7 @@
       </div>
 
       <div class="member-card" data-member="yunah" tabindex="0" role="button">
+        <button class="member-share-btn" data-share="yunah" aria-label="Share Yunah" title="Share">⎋</button>
         <div class="member-img-wrap">
           <img src="assets/yunah.jpg" class="member-img" alt="Yunah"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
@@ -356,7 +361,7 @@
       <div class="fandom-card">
         <div class="fandom-icon">✨</div>
         <div class="fandom-label">Name Meaning</div>
-        <div class="fandom-value">From "glitter" — fans shine brightest</div>
+        <div class="fandom-value">From "glitter" — fans who shine</div>
       </div>
 
       <div class="fandom-card">
@@ -387,6 +392,24 @@
         <div class="fandom-value">Magnetic</div>
       </div>
 
+      <div class="fandom-card">
+        <div class="fandom-icon">🏆</div>
+        <div class="fandom-label">Award Wins</div>
+        <div class="fandom-value">20+ wins</div>
+      </div>
+
+      <div class="fandom-card">
+        <div class="fandom-icon">🎵</div>
+        <div class="fandom-label">Spotify Monthly</div>
+        <div class="fandom-value">13.6M listeners</div>
+      </div>
+
+      <div class="fandom-card">
+        <div class="fandom-icon">🏅</div>
+        <div class="fandom-label">Music Show Wins</div>
+        <div class="fandom-value">Magnetic — 12× wins</div>
+      </div>
+
     </div>
 
     <!-- Social links — centred -->
@@ -408,6 +431,9 @@
       <p class="footer-copy">Made with 🌸 for GLLIT · <span id="footerDate"></span></p>
     </div>
   </footer>
+
+  <!-- Share toast -->
+  <div class="share-toast" id="shareToast"></div>
 
   <script src="script.js"></script>
 </body>

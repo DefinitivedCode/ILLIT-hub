@@ -197,6 +197,51 @@ document.querySelectorAll('.member-card').forEach(card => {
 });
 
 // ─────────────────────────────────────────────
+// SHARE BUTTON on member cards
+// ─────────────────────────────────────────────
+const shareToast = document.getElementById('shareToast');
+let toastTimer;
+
+function showToast(msg) {
+  shareToast.textContent = msg;
+  shareToast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => shareToast.classList.remove('show'), 2500);
+}
+
+document.querySelectorAll('.member-share-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation(); // don't open modal
+    const key = btn.dataset.share;
+    const m   = MEMBERS[key];
+    if (!m) return;
+
+    const text =
+`✦ ILLIT · ${m.name} (${m.kr.split('·')[0].trim()})
+Role: ${m.role}
+Born: ${m.tags[0]} · ${m.tags[1]}
+
+${m.facts[0].text.replace(/<[^>]+>/g, '')}
+${m.facts[1].text.replace(/<[^>]+>/g, '')}
+
+#ILLIT #${m.name} #GLLIT
+🌸 illit-hub`;
+
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      btn.textContent = '✓';
+      showToast(`✦ ${m.name}'s card copied to clipboard!`);
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.textContent = '⎋';
+      }, 2000);
+    }).catch(() => {
+      showToast('Could not copy — try selecting text manually');
+    });
+  });
+});
+
+// ─────────────────────────────────────────────
 // SCHEDULE DATA  (real, researched)
 // All events with date: new Date(YYYY, M-1, D)
 // ─────────────────────────────────────────────
@@ -252,8 +297,26 @@ function sameDay(a, b) {
 }
 
 // ─────────────────────────────────────────────
-// SCHEDULE — tabbed (Upcoming / Past)
+// SCHEDULE — tabbed, with grouped tour nights
 // ─────────────────────────────────────────────
+
+// Group consecutive events that share the same base label
+// e.g. "PRESS START♥︎ Tour — Tokyo, Japan Night 1/2/3" → one card
+function groupEvents(events) {
+  const groups = [];
+  for (const ev of events) {
+    // Strip trailing "Night N" to get a base label for grouping
+    const baseLabel = ev.label.replace(/\s+Night\s+\d+$/i, '').trim();
+    const last = groups[groups.length - 1];
+    if (last && last.baseLabel === baseLabel && last.type === ev.type) {
+      last.dates.push(ev.date);
+    } else {
+      groups.push({ ...ev, baseLabel, dates: [ev.date] });
+    }
+  }
+  return groups;
+}
+
 function buildSchedule() {
   const list  = document.getElementById('scheduleList');
   const today = new Date();
@@ -261,23 +324,25 @@ function buildSchedule() {
 
   const todayEvents = SCHEDULE.filter(e => sameDay(e.date, today));
 
-  const upcomingEvents = SCHEDULE
+  const upcomingRaw = SCHEDULE
     .filter(e => { const d = new Date(e.date); d.setHours(0,0,0,0); return d >= today; })
     .sort((a,b) => a.date - b.date);
 
-  const pastEvents = SCHEDULE
+  const pastRaw = SCHEDULE
     .filter(e => { const d = new Date(e.date); d.setHours(0,0,0,0); return d < today && !sameDay(e.date, today); })
-    .sort((a,b) => b.date - a.date); // most recent first
+    .sort((a,b) => b.date - a.date);
 
-  // Update tab counts
-  document.getElementById('upcomingCount').textContent = upcomingEvents.length;
-  document.getElementById('pastCount').textContent     = pastEvents.length;
+  // Update tab counts (count grouped, not raw)
+  const upcomingGrouped = groupEvents(upcomingRaw.filter(e => !sameDay(e.date, today)));
+  const pastGrouped     = groupEvents(pastRaw);
+  document.getElementById('upcomingCount').textContent = upcomingGrouped.length + (todayEvents.length ? 1 : 0);
+  document.getElementById('pastCount').textContent     = pastGrouped.length;
 
   function renderTab(tab) {
     list.innerHTML = '';
 
     if (tab === 'upcoming') {
-      // "Today" banner
+      // Today banner
       if (todayEvents.length > 0) {
         todayEvents.forEach(ev => list.appendChild(makeItem(ev, 'today-item')));
       } else {
@@ -296,8 +361,7 @@ function buildSchedule() {
         list.appendChild(noEvent);
       }
 
-      const future = upcomingEvents.filter(e => !sameDay(e.date, today));
-      if (future.length === 0) {
+      if (upcomingGrouped.length === 0) {
         const empty = document.createElement('div');
         empty.className = 'schedule-item no-event';
         empty.innerHTML = `<div class="sched-info" style="padding:0.5rem 0">
@@ -305,14 +369,13 @@ function buildSchedule() {
           <p>Follow Weverse for announcements 🔔</p></div>`;
         list.appendChild(empty);
       } else {
-        future.forEach(ev => list.appendChild(makeItem(ev, 'upcoming')));
+        upcomingGrouped.forEach(ev => list.appendChild(makeGroupedItem(ev, 'upcoming')));
       }
 
     } else {
-      pastEvents.forEach(ev => list.appendChild(makeItem(ev, 'past')));
+      pastGrouped.forEach(ev => list.appendChild(makeGroupedItem(ev, 'past')));
     }
 
-    // Weverse link always at bottom
     const link = document.createElement('div');
     link.className = 'schedule-item link-row';
     link.innerHTML = `<a href="https://weverse.io/illit" target="_blank" rel="noopener" class="official-link">
@@ -320,7 +383,6 @@ function buildSchedule() {
     list.appendChild(link);
   }
 
-  // Wire up tab buttons
   let activeTab = 'upcoming';
   renderTab(activeTab);
 
@@ -334,14 +396,14 @@ function buildSchedule() {
   });
 }
 
+// Single-date item (for "today" items)
 function makeItem(ev, extraClass) {
-  const el   = document.createElement('div');
+  const el     = document.createElement('div');
   const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-  const mon  = months[ev.date.getMonth()];
-  const day  = ev.date.getDate();
-  const year = ev.date.getFullYear();
+  const mon    = months[ev.date.getMonth()];
+  const day    = ev.date.getDate();
+  const year   = ev.date.getFullYear();
   const tagCls = TAG_CLASS[ev.tag] || '';
-
   el.className = `schedule-item ${extraClass}`;
   el.innerHTML = `
     <div class="sched-date">
@@ -354,6 +416,64 @@ function makeItem(ev, extraClass) {
       <p>${ev.sub}</p>
       <span class="sched-tag ${tagCls}">${ev.tag}</span>
     </div>`;
+  return el;
+}
+
+// Grouped item — shows all nights as pills if multi-night
+function makeGroupedItem(ev, extraClass) {
+  const today  = new Date(); today.setHours(0,0,0,0);
+  const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const tagCls = TAG_CLASS[ev.tag] || '';
+  const el     = document.createElement('div');
+
+  if (ev.dates.length === 1) {
+    // Single date — same as before
+    const d = ev.dates[0];
+    el.className = `schedule-item ${extraClass}`;
+    el.innerHTML = `
+      <div class="sched-date">
+        <span class="sched-month">${months[d.getMonth()]}</span>
+        <span class="sched-day">${d.getDate()}</span>
+        <span class="sched-year">${d.getFullYear()}</span>
+      </div>
+      <div class="sched-info">
+        <h4>${ev.baseLabel}</h4>
+        <p>${ev.sub}</p>
+        <span class="sched-tag ${tagCls}">${ev.tag}</span>
+      </div>`;
+    return el;
+  }
+
+  // Multi-night — grouped card
+  el.className = `schedule-item tour-group ${extraClass}`;
+
+  // Use first date for the main date display
+  const first = ev.dates[0];
+  const last  = ev.dates[ev.dates.length - 1];
+
+  // Night pills
+  const nightPills = ev.dates.map((d, i) => {
+    const isPast  = d < today && !sameDay(d, today);
+    const isToday = sameDay(d, today);
+    const cls     = isToday ? 'today-night' : isPast ? 'past-night' : '';
+    const label   = `Night ${i + 1} — ${months[d.getMonth()]} ${d.getDate()}`;
+    return `<span class="night-pill ${cls}">${label}</span>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="tour-group-header">
+      <div class="sched-date">
+        <span class="sched-month">${months[first.getMonth()]}</span>
+        <span class="sched-day">${first.getDate()}–${last.getDate()}</span>
+        <span class="sched-year">${first.getFullYear()}</span>
+      </div>
+      <div class="sched-info">
+        <h4>${ev.baseLabel}</h4>
+        <p>${ev.sub} · <strong>${ev.dates.length} nights</strong></p>
+        <span class="sched-tag ${tagCls}">${ev.tag}</span>
+      </div>
+    </div>
+    <div class="tour-nights">${nightPills}</div>`;
   return el;
 }
 

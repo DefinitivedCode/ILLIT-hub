@@ -55,10 +55,28 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
   background-color: var(--bg);
+  /* Seamless full-page gradient — no cutoff on scroll */
+  background-image:
+    radial-gradient(ellipse 80% 60% at 85% 5%,  rgba(244,114,182,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 18%, rgba(196,181,253,0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 50% 45%, rgba(110,231,183,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 5%  70%, rgba(244,114,182,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 65% 50% at 90% 80%, rgba(196,181,253,0.13) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 40% 95%, rgba(110,231,183,0.09) 0%, transparent 50%);
+  background-attachment: fixed;
   color: var(--text);
   line-height: 1.65;
   transition: background-color var(--transition), color var(--transition);
   overflow-x: hidden;
+}
+body.dark {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 85% 5%,  rgba(249,168,212,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 18%, rgba(167,139,250,0.11) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 50% 45%, rgba(110,231,183,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 5%  70%, rgba(249,168,212,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 65% 50% at 90% 80%, rgba(167,139,250,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 40% 95%, rgba(110,231,183,0.06) 0%, transparent 50%);
 }
 
 img { max-width: 100%; display: block; }
@@ -242,18 +260,18 @@ body.dark .site-header {
   display: flex;
   align-items: center;
   padding: 5rem 2rem;
-  overflow: hidden;
 }
 .hero-bg-blobs {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  overflow: hidden;
 }
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.45;
+  filter: blur(90px);
+  opacity: 0.35;
   animation: blobFloat 8s ease-in-out infinite;
 }
 .blob1 {
@@ -792,7 +810,6 @@ body.dark .site-header {
 /* --- FANDOM STATS --- */
 .fandom-section {
   padding: 5rem 2rem 6rem;
-  background: linear-gradient(180deg, transparent, var(--pink-pale) 30%, transparent);
 }
 .fandom-section .section-label,
 .fandom-section .section-title {
@@ -1190,4 +1207,105 @@ body.dark .site-header {
   }
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 1rem; }
+}
+
+/* ============================================
+   v3 ADDITIONS
+   ============================================ */
+
+/* --- GROUPED TOUR CARD --- */
+.schedule-item.tour-group {
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.tour-group-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+}
+.tour-nights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding-left: calc(44px + 1.2rem); /* align under sched-info */
+}
+.night-pill {
+  font-size: 0.7rem;
+  background: var(--lav-light);
+  color: var(--lavender);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 0.2rem 0.65rem;
+  font-weight: 500;
+}
+.night-pill.today-night {
+  background: var(--pink);
+  color: #fff;
+  border-color: var(--pink);
+}
+.night-pill.past-night {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+/* --- MEMBER SHARE BUTTON --- */
+.member-share-btn {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.member-card:hover .member-share-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+.member-share-btn:hover {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: #fff;
+}
+.member-share-btn.copied {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: #fff;
+}
+
+/* --- SHARE TOAST --- */
+.share-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.65rem 1.4rem;
+  border-radius: 50px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.share-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
