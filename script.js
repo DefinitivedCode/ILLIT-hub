@@ -199,8 +199,13 @@ document.querySelectorAll('.member-card').forEach(card => {
 // ─────────────────────────────────────────────
 // SHARE BUTTON on member cards
 // ─────────────────────────────────────────────
+const SHARE_ICON = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
+
 const shareToast = document.getElementById('shareToast');
 let toastTimer;
+
+// Initialise all share buttons with the SVG icon
+document.querySelectorAll('.member-share-btn').forEach(btn => { btn.innerHTML = SHARE_ICON; });
 
 function showToast(msg) {
   shareToast.textContent = msg;
@@ -229,11 +234,11 @@ ${m.facts[1].text.replace(/<[^>]+>/g, '')}
 
     navigator.clipboard.writeText(text).then(() => {
       btn.classList.add('copied');
-      btn.textContent = '✓';
+      btn.innerHTML = '&#10003;';
       showToast(`✦ ${m.name}'s card copied to clipboard!`);
       setTimeout(() => {
         btn.classList.remove('copied');
-        btn.textContent = '⎋';
+        btn.innerHTML = SHARE_ICON;
       }, 2000);
     }).catch(() => {
       showToast('Could not copy — try selecting text manually');
@@ -259,24 +264,24 @@ const SCHEDULE = [
   { date: new Date(2025, 10, 24), label: 'Not Cute Anymore — Release',      sub: '1st Single Album',                             tag: 'Release', type: 'release' },
   { date: new Date(2026, 0, 13),  label: '"Sunday Morning" — Release',      sub: 'JP single / anime OP ("Torture Princess" S2)', tag: 'Release', type: 'release' },
   // — Current / Near future —
-  { date: new Date(2026, 2, 14),  label: 'PRESS START♥︎ Tour — Seoul Night 1', sub: 'Ticketlink Live Arena, Seoul (SOLD OUT)', tag: 'Concert', type: 'concert'  },
-  { date: new Date(2026, 2, 15),  label: 'PRESS START♥︎ Tour — Seoul Night 2', sub: 'Ticketlink Live Arena, Seoul (SOLD OUT) · New album announced!', tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 2, 25),  label: 'ILLIT 2nd Anniversary ✦',         sub: 'Two years since debut! 🌸',                    tag: 'Milestone', type: 'milestone' },
-  { date: new Date(2026, 3, 6),   label: '"Bubee" — JP Digital Single',     sub: 'Anime theme for Magical Sisters LuluttoLilly', tag: 'Release', type: 'release' },
-  { date: new Date(2026, 3, 30),  label: 'MAMIHLAPINATAPAI — Release',      sub: '4th Mini Album · "It\'s Me" 🆕',               tag: 'NEW',     type: 'upcoming' },
+  { date: new Date(2026, 2, 14),  label: 'PRESS START Tour \u2014 Seoul Night 1', sub: 'Ticketlink Live Arena, Seoul (SOLD OUT)', tag: 'Concert', type: 'concert'  },
+  { date: new Date(2026, 2, 15),  label: 'PRESS START Tour \u2014 Seoul Night 2', sub: 'Ticketlink Live Arena, Seoul (SOLD OUT) \u00b7 New album announced!', tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 2, 25),  label: 'ILLIT 2nd Anniversary \u2736',         sub: 'Two years since debut! \ud83c\udf38',                    tag: 'Milestone', type: 'milestone' },
+  { date: new Date(2026, 3, 6),   label: '"Bubee" \u2014 JP Digital Single',     sub: 'Anime theme for Magical Sisters LuluttoLilly', tag: 'Release', type: 'release' },
+  { date: new Date(2026, 3, 30),  label: 'MAMIHLAPINATAPAI \u2014 Release',      sub: '4th Mini Album \u00b7 "It\'s Me" \ud83c\udd95',               tag: 'NEW',     type: 'upcoming' },
   // — Tour continues —
-  { date: new Date(2026, 5, 13),  label: 'PRESS START♥︎ — Aichi, Japan Night 1', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 14),  label: 'PRESS START♥︎ — Aichi, Japan Night 2', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 20),  label: 'PRESS START♥︎ — Osaka, Japan Night 1', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 21),  label: 'PRESS START♥︎ — Osaka, Japan Night 2', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 29),  label: 'PRESS START♥︎ — Fukuoka, Japan Night 1', sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 30),  label: 'PRESS START♥︎ — Fukuoka, Japan Night 2', sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 18),  label: 'PRESS START♥︎ — Hyogo, Japan Night 1',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 19),  label: 'PRESS START♥︎ — Hyogo, Japan Night 2',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 23),  label: 'PRESS START♥︎ — Tokyo, Japan Night 1',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 25),  label: 'PRESS START♥︎ — Tokyo, Japan Night 2',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 26),  label: 'PRESS START♥︎ — Tokyo, Japan Night 3',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 7, 22),  label: 'PRESS START♥︎ — Hong Kong (FINALE)',     sub: 'Tour finale — Hong Kong',             tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 5, 13),  label: 'PRESS START Tour \u2014 Aichi, Japan Night 1', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 5, 14),  label: 'PRESS START Tour \u2014 Aichi, Japan Night 2', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 5, 20),  label: 'PRESS START Tour \u2014 Osaka, Japan Night 1', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 5, 21),  label: 'PRESS START Tour \u2014 Osaka, Japan Night 2', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 5, 29),  label: 'PRESS START Tour \u2014 Fukuoka, Japan Night 1', sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 5, 30),  label: 'PRESS START Tour \u2014 Fukuoka, Japan Night 2', sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 6, 18),  label: 'PRESS START Tour \u2014 Hyogo, Japan Night 1',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 6, 19),  label: 'PRESS START Tour \u2014 Hyogo, Japan Night 2',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 6, 23),  label: 'PRESS START Tour \u2014 Tokyo, Japan Night 1',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 6, 25),  label: 'PRESS START Tour \u2014 Tokyo, Japan Night 2',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 6, 26),  label: 'PRESS START Tour \u2014 Tokyo, Japan Night 3',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 7, 22),  label: 'PRESS START Tour \u2014 Hong Kong (FINALE)',     sub: 'Tour finale \u2014 Hong Kong',             tag: 'Concert', type: 'concert' },
 ];
 
 // Tag class map
