@@ -36,22 +36,22 @@ if (navBurger && navLinks) {
 }
 
 // ─────────────────────────────────────────────
-// MEMBER DATA  (researched & accurate)
+// MEMBER DATA 
 // ─────────────────────────────────────────────
 const MEMBERS = {
   yunah: {
     name: 'Yunah',   kr: '유나 · Noh Yunah (노윤아)',
-    role: 'Leader · Lead Vocalist · Lead Dancer',
+    role: 'Lead Vocalist · Lead Dancer',
     fallback: '유나',
     colour: { from: '#93c5fd', to: '#60a5fa' },
     tags: ['Jan 15, 2004', '🇰🇷 Korean', 'Capricorn', 'ENTP'],
     facts: [
-      { icon: '🏋️', text: '<strong>Training:</strong> Nearly 5 years — the longest of any ILLIT member.' },
-      { icon: '✍️', text: '<strong>Songwriter:</strong> Co-wrote "Do the Dance" with Le Sserafim\'s Huh Yunjin.' },
+      { icon: '🏋️', text: '<strong>Training:</strong> ~6 years — the longest of any ILLIT member.' },
+      { icon: '✍️', text: '<strong>Songwriter:</strong> Co-wrote "Do the Dance" with LE SSERAFIM\'s Huh Yunjin.' },
+      { icon: '🎤', text: '<strong>Collab:</strong> Featured on "See U Tonight" with Minju for Kylie Cantrall\'s debut EP <em>B.O.Y</em> (2025).' },
       { icon: '🐆', text: '<strong>Emoji:</strong> 🐆 Cheetah. Favourite food: anything, except spicy food.' },
       { icon: '💬', text: '<strong>Motto:</strong> "Time heals all wounds."' },
       { icon: '🎬', text: '<strong>Loves:</strong> Historical films, especially Korean history. Can imitate Crayon Shin-chan\'s voice.' },
-      { icon: '🎤', text: 'Performed "I Will Go to You Like the First Snow" by Ailee at her HYBE audition.' },
     ],
   },
   minju: {
@@ -59,14 +59,14 @@ const MEMBERS = {
     role: 'Main Vocalist · Main Rapper · Visual',
     fallback: '민주',
     colour: { from: '#c4b5fd', to: '#a78bfa' },
-    tags: ['May 11, 2004', '🇰🇷 Korean', 'Taurus', 'ISTP'],
+    tags: ['May 11, 2004', '🇰🇷 Korean', 'Taurus', 'ISTJ'],
     facts: [
-      { icon: '🎓', text: '<strong>Former trainee:</strong> YG Entertainment; joined Belift Lab in late 2021.' },
+      { icon: '🎓', text: '<strong>Former trainee:</strong> YG Entertainment — close friends with BABYMONSTER members from those days.' },
+      { icon: '📺', text: '<strong>Music Bank MC:</strong> Hosted KBS Music Bank from October 2024 to January 2026.' },
+      { icon: '🎤', text: '<strong>Collab:</strong> Featured on "See U Tonight" with Yunah for Kylie Cantrall\'s debut EP <em>B.O.Y</em> (2025).' },
       { icon: '🐰', text: '<strong>Nickname:</strong> "Dumpling" (round cheeks) · Emoji: 🐰 Bunny.' },
       { icon: '🎻', text: '<strong>Hidden talent:</strong> Plays the violin.' },
       { icon: '🎵', text: '<strong>Inspiration:</strong> Looks up to DPR Ian as a musical role model.' },
-      { icon: '👑', text: 'Voted as ILLIT\'s Visual by fans. Known for her powerful vocal delivery on stage.' },
-      { icon: '📏', text: '<strong>Training:</strong> Has been training since she was 15 years old.' },
     ],
   },
   moka: {
@@ -76,11 +76,11 @@ const MEMBERS = {
     colour: { from: '#6ee7b7', to: '#34d399' },
     tags: ['Jul 6, 2004', '🇯🇵 Japanese', 'Cancer', 'INFP'],
     facts: [
+      { icon: '💛', text: '<strong>Health hiatus:</strong> On April 20, 2026, Belift Lab announced Moka is taking a temporary break to focus on recovery. Sending her lots of love 🫶' },
       { icon: '🏢', text: '<strong>Training:</strong> HYBE Japan; attended Dance School Bridge.' },
       { icon: '👩‍👧', text: '<strong>Nickname:</strong> "Mother" of the group — known for her warmth and care.' },
       { icon: '💅', text: '<strong>Role model:</strong> BLACKPINK\'s Jennie. Her mother introduced her to K-pop via BIGBANG.' },
       { icon: '🐱', text: 'Loves cats — if she could have a pet, it would be a cat. Also loves movies.' },
-      { icon: '🍞', text: 'If she could eat only one food forever, it would be bread.' },
       { icon: '💬', text: '<strong>Motto:</strong> "Even if it\'s hard now, if I work hard, better days will come."' },
     ],
   },
@@ -106,12 +106,12 @@ const MEMBERS = {
     colour: { from: '#fde68a', to: '#fbbf24' },
     tags: ['Feb 4, 2008', '🇯🇵 Japanese', 'Aquarius', 'INFJ'],
     facts: [
-      { icon: '💃', text: 'Has been <strong>dancing since age 3</strong>. Former JYP Entertainment trainee.' },
+      { icon: '💃', text: 'Has been <strong>dancing since age 3</strong>. Former JYP Entertainment trainee — one of the most experienced performers in ILLIT.' },
       { icon: '👶', text: 'Maknae (youngest) of ILLIT at 158 cm — but her stage presence commands every room.' },
       { icon: '🌸', text: 'Selected by both the production team AND fan votes on R U Next?.' },
       { icon: '👔', text: '<strong>Unexpected hobby:</strong> Ironing clothes 🧺.' },
       { icon: '🎌', text: 'Close friends with members of NiziU. Born in Tokyo, Japan.' },
-      { icon: '📏', text: 'Has trained the <strong>2nd longest</strong> of any member (4–5 years).' },
+      { icon: '🌟', text: 'Born in Tokyo and raised between Japan and Korea — her bilingual fluency makes her a key bridge for ILLIT\'s Japanese promotions.' },
     ],
   },
 };
@@ -252,36 +252,40 @@ ${m.facts[1].text.replace(/<[^>]+>/g, '')}
 // ─────────────────────────────────────────────
 const SCHEDULE = [
   // — Past milestones —
-  { date: new Date(2024, 2, 25),  label: 'DEBUT — SUPER REAL ME',         sub: 'Global album release + showcase · "Magnetic"',  tag: 'Release', type: 'release' },
-  { date: new Date(2024, 9, 21),  label: 'I\'ll Like You — Release',       sub: '2nd Mini Album · "Cherish (My Love)"',          tag: 'Release', type: 'release' },
-  { date: new Date(2024, 10, 22), label: '"Baby It\'s Both" feat. Ava Max', sub: 'English version of "Tick-Tack"',                tag: 'Single',  type: 'release' },
-  { date: new Date(2024, 10, 30), label: 'Melon Music Awards',              sub: 'Seoul — Best New Artist win 🏆',                tag: 'Award',   type: 'award'   },
-  { date: new Date(2024, 11, 8),  label: 'MAMA Awards 2024',                sub: 'Los Angeles, USA',                              tag: 'Award',   type: 'award'   },
-  { date: new Date(2025, 1, 14),  label: '"Almond Chocolate" — JP Release', sub: 'First original Japanese song (OST)',           tag: 'Release', type: 'release' },
-  { date: new Date(2025, 2, 25),  label: 'ILLIT 1st Anniversary ✦',        sub: 'One year since debut!',                         tag: 'Milestone', type: 'milestone' },
-  { date: new Date(2025, 5, 16),  label: 'bomb — Release',                  sub: '3rd Mini Album · "Do the Dance"',              tag: 'Release', type: 'release' },
-  { date: new Date(2025, 8, 1),   label: 'Japanese Debut — Toki Yo Tomare', sub: 'First Japanese maxi single',                   tag: 'Release', type: 'release' },
-  { date: new Date(2025, 10, 24), label: 'Not Cute Anymore — Release',      sub: '1st Single Album',                             tag: 'Release', type: 'release' },
-  { date: new Date(2026, 0, 13),  label: '"Sunday Morning" — Release',      sub: 'JP single / anime OP ("Torture Princess" S2)', tag: 'Release', type: 'release' },
-  // — Current / Near future —
-  { date: new Date(2026, 2, 14),  label: 'PRESS START Tour \u2014 Seoul Night 1', sub: 'Ticketlink Live Arena, Seoul (SOLD OUT)', tag: 'Concert', type: 'concert'  },
-  { date: new Date(2026, 2, 15),  label: 'PRESS START Tour \u2014 Seoul Night 2', sub: 'Ticketlink Live Arena, Seoul (SOLD OUT) \u00b7 New album announced!', tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 2, 25),  label: 'ILLIT 2nd Anniversary \u2736',         sub: 'Two years since debut! \ud83c\udf38',                    tag: 'Milestone', type: 'milestone' },
-  { date: new Date(2026, 3, 6),   label: '"Bubee" \u2014 JP Digital Single',     sub: 'Anime theme for Magical Sisters LuluttoLilly', tag: 'Release', type: 'release' },
-  { date: new Date(2026, 3, 30),  label: 'MAMIHLAPINATAPAI \u2014 Release',      sub: '4th Mini Album \u00b7 "It\'s Me" \ud83c\udd95',               tag: 'NEW',     type: 'upcoming' },
-  // — Tour continues —
-  { date: new Date(2026, 5, 13),  label: 'PRESS START Tour \u2014 Aichi, Japan Night 1', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 14),  label: 'PRESS START Tour \u2014 Aichi, Japan Night 2', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 20),  label: 'PRESS START Tour \u2014 Osaka, Japan Night 1', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 21),  label: 'PRESS START Tour \u2014 Osaka, Japan Night 2', sub: 'Japan leg of PRESS START tour',         tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 29),  label: 'PRESS START Tour \u2014 Fukuoka, Japan Night 1', sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 5, 30),  label: 'PRESS START Tour \u2014 Fukuoka, Japan Night 2', sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 18),  label: 'PRESS START Tour \u2014 Hyogo, Japan Night 1',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 19),  label: 'PRESS START Tour \u2014 Hyogo, Japan Night 2',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 23),  label: 'PRESS START Tour \u2014 Tokyo, Japan Night 1',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 25),  label: 'PRESS START Tour \u2014 Tokyo, Japan Night 2',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 6, 26),  label: 'PRESS START Tour \u2014 Tokyo, Japan Night 3',   sub: 'Japan leg of PRESS START tour',       tag: 'Concert', type: 'concert' },
-  { date: new Date(2026, 7, 22),  label: 'PRESS START Tour \u2014 Hong Kong (FINALE)',     sub: 'Tour finale \u2014 Hong Kong',             tag: 'Concert', type: 'concert' },
+  { date: new Date(2024, 2, 25),  label: 'DEBUT — SUPER REAL ME',              sub: 'Global album release + showcase · "Magnetic"',           tag: 'Release',   type: 'release'   },
+  { date: new Date(2024, 9, 21),  label: 'I\'ll Like You — Release',            sub: '2nd Mini Album · "Cherish (My Love)"',                   tag: 'Release',   type: 'release'   },
+  { date: new Date(2024, 10, 22), label: '"Baby It\'s Both" feat. Ava Max',     sub: 'English version of "Tick-Tack"',                         tag: 'Single',    type: 'release'   },
+  { date: new Date(2024, 10, 30), label: 'Melon Music Awards 2024',             sub: 'Seoul — Best New Artist win 🏆',                         tag: 'Award',     type: 'award'     },
+  { date: new Date(2024, 11, 8),  label: 'MAMA Awards 2024',                    sub: 'Los Angeles, USA',                                       tag: 'Award',     type: 'award'     },
+  { date: new Date(2025, 1, 14),  label: '"Almond Chocolate" — JP Release',     sub: 'First original Japanese song (OST)',                     tag: 'Release',   type: 'release'   },
+  { date: new Date(2025, 2, 25),  label: 'ILLIT 1st Anniversary ✦',             sub: 'One year since debut!',                                  tag: 'Milestone', type: 'milestone' },
+  { date: new Date(2025, 5, 16),  label: 'bomb — Release',                      sub: '3rd Mini Album · "Do the Dance"',                       tag: 'Release',   type: 'release'   },
+  { date: new Date(2025, 8, 1),   label: 'Japanese Debut — Toki Yo Tomare',     sub: 'First Japanese maxi single',                            tag: 'Release',   type: 'release'   },
+  { date: new Date(2025, 10, 24), label: 'Not Cute Anymore — Release',          sub: '1st Single Album',                                      tag: 'Release',   type: 'release'   },
+  { date: new Date(2025, 10, 28), label: 'MAMA Awards 2025 — Chapter 1',        sub: 'Kai Tak Stadium, Hong Kong · Fans\' Choice Female Top 10 🏆', tag: 'Award', type: 'award'  },
+  { date: new Date(2025, 10, 29), label: 'MAMA Awards 2025 — Chapter 2',        sub: 'Kai Tak Stadium, Hong Kong',                            tag: 'Award',     type: 'award'     },
+  { date: new Date(2025, 11, 20), label: 'Melon Music Awards 2025',             sub: 'Gocheok Sky Dome, Seoul · Best Performance – Female 🏆', tag: 'Award',   type: 'award'     },
+  { date: new Date(2026, 0, 13),  label: '"Sunday Morning" — Release',          sub: 'JP single / anime OP ("Torture Princess" S2)',          tag: 'Release',   type: 'release'   },
+  { date: new Date(2026, 2, 14),  label: 'PRESS START Tour — Seoul Night 1',    sub: 'Ticketlink Live Arena, Seoul (SOLD OUT)',                tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 2, 15),  label: 'PRESS START Tour — Seoul Night 2',    sub: 'Ticketlink Live Arena, Seoul (SOLD OUT) · MAMIHLAPINATAPAI announced!', tag: 'Concert', type: 'concert' },
+  { date: new Date(2026, 2, 25),  label: 'ILLIT 2nd Anniversary ✦',             sub: 'Two years since debut! 🌸',                             tag: 'Milestone', type: 'milestone' },
+  { date: new Date(2026, 3, 6),   label: '"Bubee" — JP Digital Single',         sub: 'Anime theme for Magical Sisters LuluttoLilly',          tag: 'Release',   type: 'release'   },
+  { date: new Date(2026, 3, 30),  label: 'MAMIHLAPINATAPAI — Release',          sub: '4th Mini Album · "It\'s Me"',                           tag: 'Release',   type: 'release'   },
+  // — Tour + events —
+  { date: new Date(2026, 5, 6),   label: 'Weverse Con Festival 2026 — Day 1',   sub: 'KSPO Dome & 88 Lawn Field, Olympic Park, Seoul',        tag: 'Festival',  type: 'concert'   },
+  { date: new Date(2026, 5, 7),   label: 'Weverse Con Festival 2026 — Day 2',   sub: 'KSPO Dome & 88 Lawn Field, Olympic Park, Seoul',        tag: 'Festival',  type: 'concert'   },
+  { date: new Date(2026, 5, 13),  label: 'PRESS START Tour — Aichi Night 1',    sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 5, 14),  label: 'PRESS START Tour — Aichi Night 2',    sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 5, 20),  label: 'PRESS START Tour — Osaka Night 1',    sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 5, 21),  label: 'PRESS START Tour — Osaka Night 2',    sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 5, 29),  label: 'PRESS START Tour — Fukuoka Night 1',  sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 5, 30),  label: 'PRESS START Tour — Fukuoka Night 2',  sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 6, 18),  label: 'PRESS START Tour — Hyogo Night 1',    sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 6, 19),  label: 'PRESS START Tour — Hyogo Night 2',    sub: 'Japan leg of PRESS START tour',                         tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 6, 23),  label: 'PRESS START Tour — Tokyo Night 1',    sub: 'Toyota Arena Tokyo',                                    tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 6, 25),  label: 'PRESS START Tour — Tokyo Night 2',    sub: 'Toyota Arena Tokyo',                                    tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 6, 26),  label: 'PRESS START Tour — Tokyo Night 3',    sub: 'Toyota Arena Tokyo',                                    tag: 'Concert',   type: 'concert'   },
+  { date: new Date(2026, 7, 22),  label: 'PRESS START Tour — Hong Kong (FINALE)', sub: 'Tour finale — Hong Kong',                            tag: 'Concert',   type: 'concert'   },
 ];
 
 // Tag class map
